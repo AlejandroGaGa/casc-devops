@@ -1,0 +1,6 @@
+configuration-as-code
+git
+pipeline
+workflow-aggregator
+credentials
+docker-workflow
