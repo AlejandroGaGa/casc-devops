@@ -1,0 +1,25 @@
+- name: Create Jenkins directory
+  file:
+    path: /opt/jenkins
+    state: directory
+
+- name: Copy Jenkins docker files
+  copy:
+    src: jenkins/
+    dest: /opt/jenkins
+
+- name: Create .env file for Jenkins
+  template:
+    src: env.j2
+    dest: /opt/jenkins/.env
+    mode: '0600'
+
+- name: Create docker-compose file
+  template:
+    src: docker-compose.yml.j2
+    dest: /opt/jenkins/docker-compose.yml
+
+- name: Start Jenkins with Docker Compose
+  command: docker compose up -d
+  args:
+    chdir: /opt/jenkins
